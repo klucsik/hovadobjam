@@ -8,4 +8,4 @@ def index():
 
 @app.route('/hullinfo')
 def index():
-    return "itt lesz a hulladékinfó!"
+    return "megy a travis?!"
