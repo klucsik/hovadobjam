@@ -1,11 +1,9 @@
-# Set the build language to Python
 language: python
-
-
 install:
-  - pip install -r requirements.txt
-  -
-# Run the pytest
+- pip install -r requirements.txt
+- 
 script:
-      - pytest
-
+- pytest
+deploy:
+  api_key:
+    secure: o5erS/KDCnaATF3OJp0rTrMV1UBf/9Zale7b4S6RgZ1JC5BFMZWDaZWd6/10pMpRZnJPEhAr4M5AqJxm5NxQ5rFIttqEw3P7syOr7DyfX2QNQjkkt1KntD0/nas7q8i8gdILw9e4B8sFzv0Kn4iDlDJFLEA6/JkFv0D8MRM72Z+QPDZbZ4igezbYc4LKGGVnmLuo/sS6Ns/CG5KCnGmnhFVAxg7+8QUaujDRKCS6Py3ySPs/VKwKYII5FZ7ViaC/joFOqzNfjRjdsGh2hw0/w9YH2eQAD05Vw2s3OGoWtKcAVuck78iW3+i9mNruQhv0hO11HjNRVdcQv5YPj1A065LS2zP2q61diVtCZo74X81TwmS4AyQ5+1CMT7mK/CnrxzDzZ7lkWsUVAHubr0iX8rVeFm9waCK2P3WmoQpfShUhwIOPUKYnaDBoui25bQmy7B3xP4Thi0iBhF/1iMskoN8oiIYVBiHkuOZYcQTX2mpU3BAZ/mKkYUT+r7PnFQS836vf8nIV4f19yS4HubkOBpxIXmbb9gDjRKYtdsXsBO6JT3NedkJ8gDQGo12NNmRKH6QhB9xXK33vcC2jKX1YBVNbGRptHGN+45nBPsZe4Q2b5M0qonk2raPINXzSjw5DgVe3oD5c60s7pRBsueaG1CoRBDVRBQX92oPYL2/WTJI=
