@@ -7,5 +7,5 @@ def index():
 
 
 @app.route('/hullinfo')
-def index():
+def hullinfo():
     return "megy a travis?!"
