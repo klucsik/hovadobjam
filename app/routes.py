@@ -8,4 +8,4 @@ def index():
 
 @app.route('/hullinfo')
 def hullinfo():
-    return "megy a travis?!"
+    return "automata deployment?"
