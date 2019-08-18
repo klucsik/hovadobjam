@@ -7,5 +7,5 @@ def index():
 
 
 @app.route('/hullinfo')
-def index():
-    return "itt lesz a hulladékinfó!"
+def hullinfo():
+    return "megy a travis?!"
