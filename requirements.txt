@@ -3,3 +3,5 @@ pytest
 python-dotenv
 gunicorn
 flask-sqlalchemy
+Flask-Script
+psycopg2
