@@ -1,11 +1,21 @@
 from app import db
 
-class piffs(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    piff = db.Column(db.String(80), unique=False, nullable=False)
+
+class hullinfo(db.Model):
+    __tablename__ = 'hullinfo'
+    id = db.Column(db.Integer, primary_key=True)
+    hull_id = db.Column(db.Integer, unique=False, nullable=False)
+    name = db.Column(db.String(150), unique=False, nullable=False)
+    description = db.Column(db.String(500), unique=False, nullable=True)
+    version = db.Column(db.Integer, nullable=False)
 
 
-    def __repr__(self):
-        return '<PIFF: %r>' % self.piff
+class alias(db.Model):
+    __tablename__ = 'alias'
+    id = db.Column(db.Integer, primary_key=True)
+    hull_id = db.Column(db.Integer, unique=False, nullable=False)
+    name = db.Column(db.String(150), unique=False, nullable=False)
+
+
 
 # db.create_all()-al lehet felküdleni a sémánkat
