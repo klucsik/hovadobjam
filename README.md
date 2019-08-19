@@ -6,3 +6,5 @@ elérhetőség: https://hovadobjam.herokuapp.com/
 Ha masterbe van pusholva azonnal lebuildeli és deployolja, szóva így kb 1 percen belül már elérhető amit műveltél :D
 
 rendes readme, projektek n shit coming soon
+
+A travisnak az a bánata hogy nincs teszt :D ezért fut errorra
