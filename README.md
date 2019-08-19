@@ -8,3 +8,4 @@ Ha masterbe van pusholva azonnal lebuildeli és deployolja, szóva így kb 1 per
 rendes readme, projektek n shit coming soon
 
 A travisnak az a bánata hogy nincs teszt :D ezért fut errorra
+
