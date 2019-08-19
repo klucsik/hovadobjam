@@ -8,6 +8,9 @@ A másodlagos cél a tanulás!
 * Continoius Deployment Herokuval
 * Python programozás fejlesztése: Flask, SQLAlchemy, Pytest
 
-elérhetőség: https://hovadobjam.herokuapp.com/
+Alkalmazás elérhetősége: https://hovadobjam.herokuapp.com/
 
+Pipeline:
+A masterbe küldött pull requesteken a travis futtatja a pytestet (szóval ami nálad terminálban pytest paranccsal lefut, nála is az fog).
+A masterbe ekrülő összes push után a heroku deployolja az alkalmazást, az pár percen belül elérhető is lesz.
 
