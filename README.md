@@ -1,11 +1,13 @@
 # hovadobjam [![Build Status](https://travis-ci.org/klucsik/hovadobjam.svg?branch=master)](https://travis-ci.org/klucsik/hovadobjam)
 
-Szelektív hulladékgyűjtést segítő alkalmazás fejlesztése: proof of concept résznél tartunk
+Az alkalmazás elsődleges célja választ adni a nagy kérdésre: "Hát ezt meg mégis hova dobjam?"
+A szelektív gyűjtés nem olyan egyszerű mint elsőnek tűnik, de majd msot az lesz!
+
+A másodlagos cél a tanulás!
+* Contious Integration Travissal
+* Continoius Deployment Herokuval
+* Python programozás fejlesztése: Flask, SQLAlchemy, Pytest
 
 elérhetőség: https://hovadobjam.herokuapp.com/
-Ha masterbe van pusholva azonnal lebuildeli és deployolja, szóva így kb 1 percen belül már elérhető amit műveltél :D
 
-rendes readme, projektek n shit coming soon
-
-A travisnak az a bánata hogy nincs teszt :D ezért fut errorra
 
