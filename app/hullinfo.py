@@ -81,6 +81,9 @@ def get_hullinfo_by_name(name,  version=-1):
 
     return result_row
 
+
+
+
 def resultproxy_to_rowproxy(resultproxy):
     d, a = {}, []
     for rowproxy in resultproxy:

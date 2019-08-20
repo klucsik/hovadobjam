@@ -14,8 +14,6 @@ class alias(db.Model):
     __tablename__ = 'alias'
     id = db.Column(db.Integer, primary_key=True)
     hull_id = db.Column(db.Integer, unique=False, nullable=False)
-    name = db.Column(db.String(150), unique=False, nullable=False)
+    name = db.Column(db.String(150), unique=True, nullable=False)
 
 
-
-# db.create_all()-al lehet felküdleni a sémánkat
