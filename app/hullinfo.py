@@ -17,12 +17,11 @@ def create_hullinfo(name, hull_id=0,  version=0, description=""):
     https://docs.sqlalchemy.org/en/13/orm/tutorial.html#adding-and-updating-objects
     """
     #validation goes here: nem lehet ugyanolyan hull_id-vel adatot feltenni, mert az put és verziószámot kell növelni
-    if hull_id is not 0:
-        new_hullinfo_row = hullinfo(hull_id=hull_id, version=version, name=name, description=description)
-    else:
-        new_hullinfo_row = hullinfo(version=version, name=name, description=description)
+    if hull_id is 0:
         #generálni kell hull_id-t
+        hull_id = 42
 
+    new_hullinfo_row = hullinfo(hull_id=hull_id, version=version, name=name, description=description)
     db.session.add(new_hullinfo_row)
     db.session.flush()
     db.session.commit()
