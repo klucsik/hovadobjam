@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h2>Keresés</h2>
+    <form action="" method="post" novalidate>
+        {{ form1.hidden_tag() }}
+        <p>
+            {{ form1.hullinfo_alias.label }}{{ form1.hullinfo_alias(size=50) }}
+        </p>
+        <p>{{ form1.submit() }}</p>
+    </form>
+
+
+    <h2>Adatlap</h2>
+
+{% for i in adatlap %}
+  {% for k,v in i.items() %}
+      <h3>{{k}} : {{v}}</h3>
+  {% endfor %}
+{% endfor %}
+
+
+
+    <h1>Beküldés</h1>
+    <form action="" method="post" novalidate>
+        {{ form2.hidden_tag() }}
+        <p>
+            {{ form2.hullinfo_name.label }}{{ form2.hullinfo_name(size=50) }}
+        </p>
+        <p>
+            {{ form2.hullinfo_description.label }}{{ form2.hullinfo_description(size=50) }}
+        </p>
+        <p>{{ form2.submit() }}</p>
+
+    </form>
+
+{% endblock %}
