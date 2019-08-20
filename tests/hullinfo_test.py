@@ -15,8 +15,8 @@ def test_get_hullinfo_by_hull_id():
     assert get_hullinfo_by_hull_id(666)[0]['name'] == 'test_for_get_hullinfo'
 
 def test_get_hullinfo_by_name():
-    create_hullinfo('test_for_get_hullinfo', 333)
-    assert get_hullinfo_by_name("test_for_get_hullinfo")[0]['hull_id'] == 333
+    create_hullinfo('test_for_get_hullinfo_1', 333)
+    assert get_hullinfo_by_name("test_for_get_hullinfo_1")[0]['hull_id'] == 333
 
 def test_create_hullinfo_hull_id_creation():
     first_id = create_hullinfo('test_for_hull_id_increment')[0]['hull_id']
