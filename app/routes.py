@@ -1,6 +1,7 @@
 from app import db, app
 from flask import request
 from app.hullinfo import *
+from app.alias import *
 from flask import render_template, flash, redirect
 from app.forms import *
 
@@ -10,7 +11,7 @@ from app.forms import *
 def index():
     form = HullinfoKeresesForm()
     if form.validate_on_submit():
-        adatlap = get_hullinfo_by_name(form.hullinfo_alias.data)
+        adatlap = get_hullinfo_by_alias(form.hullinfo_alias.data)
         try:
             return redirect('/hullinfo/' + str(adatlap[0]['hull_id']))
         except:
@@ -31,9 +32,12 @@ def index():
 def hulladek_keresese():
     form = HullinfoKeresesForm()
     if form.validate_on_submit():
-        flash('Hulladék adat keresése: {}'.format(
-            form.hullinfo_alias.data))
-        return redirect('/hulladek_keresese')
+        adatlap = get_hullinfo_by_alias(form.hullinfo_alias.data)
+        try:
+            return redirect('/hullinfo/' + str(adatlap[0]['hull_id']))
+        except:
+            flash('a keresett hulladék nem található: ')
+            return redirect('/index')
     return render_template('hulladek_keresese.html', title='Hulladék keresése', form=form)
 
 
@@ -52,11 +56,12 @@ def hulladek_bekuldese():
 @app.route('/hullinfo/<hull_id>', methods=['GET', 'POST'])
 def hullinfo(hull_id):
     adatlap = get_hullinfo_by_hull_id(hull_id)
+    aliases = get_aliases_from_hull_id(hull_id)
 
     form1 = HullinfoKeresesForm()
 
     if form1.validate_on_submit():
-        adatlap = get_hullinfo_by_name(form1.hullinfo_alias.data)
+        adatlap = get_hullinfo_by_alias(form1.hullinfo_alias.data)
         if adatlap[0]['hull_id'] >= 0:
             return redirect('/hullinfo/'+str(adatlap[0]['hull_id']))
         else:
@@ -74,7 +79,7 @@ def hullinfo(hull_id):
         return redirect('/index')
 
 
-    return render_template('hullinfo.html', title='Hulladék adatlap', form1=form1, form2=form2, adatlap=adatlap)
+    return render_template('hullinfo.html', title='Hulladék adatlap', form1=form1, form2=form2, adatlap=adatlap, aliases = aliases)
 
 
 

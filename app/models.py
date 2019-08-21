@@ -10,7 +10,7 @@ class hullinfo(db.Model):
     version = db.Column(db.Integer, nullable=False)
 
 
-class alias(db.Model):
+class aliasTable(db.Model):
     __tablename__ = 'alias'
     id = db.Column(db.Integer, primary_key=True)
     hull_id = db.Column(db.Integer, unique=False, nullable=False)
