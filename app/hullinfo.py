@@ -13,13 +13,13 @@ from sqlalchemy import text
 
 
 # ezt fogja meghívni a post metódus, validáció majd mezőbe szúrás
-def create_hullinfo(name, hull_id=0,  version=0, description=""):
+def create_hullinfo(name, hull_id=-1,  version=0, description=""):
     """
     hullinfó bejegyzés létrehozása
     https://docs.sqlalchemy.org/en/13/orm/tutorial.html#adding-and-updating-objects
     """
 
-    if hull_id is 0:
+    if hull_id is -1:
         t =text("SELECT hull_id FROM hullinfo ORDER BY hull_id DESC LIMIT 1")
         result = db.session.execute(t)
         last_hull_id = int(resultproxy_to_rowproxy(result)[0]['hull_id'])
@@ -28,18 +28,20 @@ def create_hullinfo(name, hull_id=0,  version=0, description=""):
         try:
             t = text("SELECT hull_id,version FROM hullinfo WHERE hull_id = " + str(hull_id) + " ORDER BY version DESC LIMIT 1")
             result = db.session.execute(t)
-            unporxiedresult = resultproxy_to_rowproxy(result)
-            last_version = int(unporxiedresult[0]['version'])
+            unproxiedresult = resultproxy_to_rowproxy(result)
+            last_version = int(unproxiedresult[0]['version'])
             version = last_version + 1
         except:
             print("creating new row")
         else:
-            print(" updating row: " + str(unporxiedresult[0]['hull_id']))
+            print(" updating row: " + str(unproxiedresult[0]['hull_id']))
 
 
 
     new_hullinfo_row = hullinfo(hull_id=hull_id, version=version, name=name, description=description)
     db.session.add(new_hullinfo_row)
+    new_alias_row = aliasTable(hull_id=hull_id, name=name)
+    db.session.add(new_alias_row)
     db.session.flush()
     db.session.commit()
 
@@ -92,7 +94,7 @@ def resultproxy_to_rowproxy(resultproxy):
             # build up the dictionary
             d = {**d, **{column: value}}
         a.append(d)
-        print('result_row')
+        print('proxytlanítottva: ')
         print(a)
     return a
 
