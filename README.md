@@ -9,6 +9,7 @@ A másodlagos cél a tanulás!
 * Python programozás fejlesztése: Flask, SQLAlchemy, Pytest
 
 Alkalmazás elérhetősége: https://hovadobjam.herokuapp.com/
+Slack szerver: https://hovadobjamdev.slack.com/
 
 Pipeline:
 A masterbe küldött pull requesteken a travis futtatja a pytestet (szóval ami nálad terminálban pytest paranccsal lefut, nála is az fog).
