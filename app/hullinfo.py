@@ -54,6 +54,8 @@ def get_hullinfo_by_hull_id(hull_id,  version=-1):
     hullinfó bejegyzés lekérdezése ID alapján a legfrissebb verziót
     https://docs.sqlalchemy.org/en/13/orm/tutorial.html#querying
     https://www.tutorialspoint.com/sqlalchemy/sqlalchemy_core_selecting_rows.htm
+
+    Az adatok a következő módon érhetőek el a váalszból: response[0]['name'] szintaktikával ( a response változik ugye)
     """
     if version == -1:
         t = text("SELECT * FROM hullinfo WHERE hull_id = " + str(hull_id) + " ORDER BY version DESC LIMIT 1")
