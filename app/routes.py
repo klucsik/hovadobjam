@@ -4,7 +4,7 @@ from app.hullinfo import *
 from app.alias import *
 from flask import render_template, flash, redirect, url_for
 from app.forms import *
-import logging as logger
+import logging
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
@@ -15,7 +15,7 @@ def index():
             adatlap = get_hullinfo_by_alias(form.hullinfo_alias.data)
             return redirect(url_for('hullinfo', hull_id=adatlap[0]['hull_id']))
         except Exception as e:
-            logger.error('Hulladék keresés error:' + str(e))
+            logging.error('Hulladék keresés error:' + str(e))
             flash(f'a keresett hulladék nem található: {form.hullinfo_alias.data} ')
             return redirect(url_for('index'))
 
@@ -40,7 +40,7 @@ def hullinfo(hull_id):
             adatlap = get_hullinfo_by_alias(form1.hullinfo_alias.data)
             return redirect(url_for('hullinfo', hull_id=adatlap[0]['hull_id']))
         except Exception as e:
-            logger.error('Hulladék keresés error:' + str(e))
+            logging.error('Hulladék keresés error:' + str(e))
             flash(f'a keresett hulladék nem található: {form1.hullinfo_alias.data}')
             return redirect(url_for('index'))
 

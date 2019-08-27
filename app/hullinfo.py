@@ -1,6 +1,7 @@
-from app import app, db
+from app import *
 from app.models import *
 from sqlalchemy import text
+
 
 # hullinfo bejegyzés:
 # id - az sor azonosítására
@@ -20,7 +21,7 @@ def create_hullinfo(name, hull_id=-1,  version=0, description=""):
     """
 
     if hull_id is -1:
-        t =text("SELECT hull_id FROM hullinfo ORDER BY hull_id DESC LIMIT 1")
+        t = text("SELECT hull_id FROM hullinfo ORDER BY hull_id DESC LIMIT 1")
         result = db.session.execute(t)
         last_hull_id = int(resultproxy_to_rowproxy(result)[0]['hull_id'])
         hull_id = last_hull_id+1
@@ -32,19 +33,16 @@ def create_hullinfo(name, hull_id=-1,  version=0, description=""):
             last_version = int(unproxiedresult[0]['version'])
             version = last_version + 1
         except:
-            print("creating new row")
+                logging.debug("creating new row")
         else:
-            print(" updating row: " + str(unproxiedresult[0]['hull_id']))
-
-
+            logging.debug(f" updating row: {unproxiedresult}")
 
     new_hullinfo_row = hullinfo(hull_id=hull_id, version=version, name=name, description=description)
+    logging.info(f"inserted hullnifo row: {new_hullinfo_row}")
     db.session.add(new_hullinfo_row)
-    new_alias_row = aliasTable(hull_id=hull_id, name=name)
-    db.session.add(new_alias_row)
+    app.alias.make_alias(name, hull_id)
     db.session.flush()
     db.session.commit()
-
 
     return get_hullinfo_by_hull_id(hull_id,version)
 
@@ -68,6 +66,7 @@ def get_hullinfo_by_hull_id(hull_id,  version=-1):
 
     return result_row
 
+
 def get_hullinfo_by_name(name,  version=-1):
     """
     hullinfó bejegyzés lekérdezése név alapján a legfrissebb verziót
@@ -86,8 +85,6 @@ def get_hullinfo_by_name(name,  version=-1):
     return result_row
 
 
-
-
 def resultproxy_to_rowproxy(resultproxy):
     d, a = {}, []
     for rowproxy in resultproxy:
@@ -96,9 +93,12 @@ def resultproxy_to_rowproxy(resultproxy):
             # build up the dictionary
             d = {**d, **{column: value}}
         a.append(d)
-        print('proxytlanítottva: ')
-        print(a)
+        # print('proxytlanítottva: ')
+        # print(a)
     return a
+
+
+import app.alias # azért van itt lent mert az aliassal ezek körkörösen hívják egymást és megmekken enélkül
 
 
 
