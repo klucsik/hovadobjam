@@ -12,9 +12,9 @@ def get_hull_id_by_alias(alias):
         result = resultproxy_to_rowproxy(result)
         result_id = resultproxy_to_rowproxy(result)[0]['hull_id']
     except Exception as e:
-        logging.error('error:' + str(e))
+        logging.error(' get_hull_id_by_alias error: ' + str(e))
         result_id = -1
-    logging.debug('get_hull_id_by_alias hull_id:' + str(result_id))
+    logging.debug('get_hull_id_by_alias hull_id: ' + str(result_id))
     return result_id
 
 

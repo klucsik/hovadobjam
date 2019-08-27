@@ -14,37 +14,43 @@ from sqlalchemy import text
 
 
 # ezt fogja meghívni a post metódus, validáció majd mezőbe szúrás
-def create_hullinfo(name, hull_id=-1,  version=0, description=""):
+def create_hullinfo(name, hull_id=-1,  version=-1, description=""):
     """
     hullinfó bejegyzés létrehozása
     https://docs.sqlalchemy.org/en/13/orm/tutorial.html#adding-and-updating-objects
     """
 
+
+
     if hull_id is -1:
-        t = text("SELECT hull_id FROM hullinfo ORDER BY hull_id DESC LIMIT 1")
-        result = db.session.execute(t)
-        last_hull_id = int(resultproxy_to_rowproxy(result)[0]['hull_id'])
-        hull_id = last_hull_id+1
-    else:
-        try:
-            t = text("SELECT hull_id,version FROM hullinfo WHERE hull_id = " + str(hull_id) + " ORDER BY version DESC LIMIT 1")
-            result = db.session.execute(t)
-            unproxiedresult = resultproxy_to_rowproxy(result)
-            last_version = int(unproxiedresult[0]['version'])
-            version = last_version + 1
-        except:
-                logging.debug("creating new row")
+        perhaps_id = app.alias.get_hull_id_by_alias(name)
+        if perhaps_id > 0:
+            hull_id = perhaps_id
         else:
-            logging.debug(f" updating row: {unproxiedresult}")
+            t = text("SELECT hull_id FROM hullinfo ORDER BY hull_id DESC LIMIT 1")
+            result = db.session.execute(t)
+            last_hull_id = int(resultproxy_to_rowproxy(result)[0]['hull_id'])
+            hull_id = last_hull_id+1
+
+    try:
+        t = text("SELECT hull_id,version FROM hullinfo WHERE hull_id = " + str(hull_id) + " ORDER BY version DESC LIMIT 1")
+        result = db.session.execute(t)
+        unproxiedresult = resultproxy_to_rowproxy(result)
+        last_version = int(unproxiedresult[0]['version'])
+        version = last_version + 1
+    except:
+        logging.debug("creating new row")
+    else:
+        logging.debug(f" updating row: {unproxiedresult}")
 
     new_hullinfo_row = hullinfo(hull_id=hull_id, version=version, name=name, description=description)
-    logging.info(f"inserted hullnifo row: {new_hullinfo_row}")
+    logging.info(f"inserted hullnifo row: {new_hullinfo_row}") # TODO ezt szépen ki kell írni egyenként
     db.session.add(new_hullinfo_row)
     app.alias.make_alias(name, hull_id)
     db.session.flush()
     db.session.commit()
 
-    return get_hullinfo_by_hull_id(hull_id,version)
+    return get_hullinfo_by_hull_id(hull_id, version)
 
 
 def get_hullinfo_by_hull_id(hull_id,  version=-1):
