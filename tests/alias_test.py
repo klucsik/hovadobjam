@@ -7,7 +7,7 @@ def test_make_alias():
 #TODO gethullinfo_by_aliasból csinálni szép tesztesetet, fixtrueal, teardownal együtt vagy nemtom lehet azmár nem unit és apin keresztül kéne de legyen emg itt is
 
 def test_get_aliases_from_hull_id():
-    assert get_aliases_from_hull_id(1) == ['krumpli','burgonya']
+    assert get_aliases_from_hull_id(1) == ['krumpli','burgonya', 'rumpl']
     assert get_aliases_from_hull_id(-1) == []
 
 def test_get_hullinfo_by_hull_id():
