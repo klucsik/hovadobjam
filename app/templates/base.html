@@ -5,13 +5,23 @@
         {% if title %}
         <title>{{ title }} - development</title>
         {% else %}
-        <title>microblog</title>
+        <title>Hova dobjam</title>
         {% endif %}
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146504097-2"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-146504097-2');
+        </script>
     </head>
     <body>
         <div>
             Hovadobjam:
-            <a href="/index">Home</a>
+            <a href= "{{url_for('index')}}">Home</a>
 
 
 

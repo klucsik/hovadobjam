@@ -1,5 +1,5 @@
 from app.hullinfo import *
-
+import time
 
 def test_create_hullinfo():
     assert create_hullinfo('test_create_1', 43, 0)[0]['hull_id'] == 43
@@ -19,6 +19,6 @@ def test_get_hullinfo_by_name():
     assert get_hullinfo_by_name("test_for_get_hullinfo_1")[0]['hull_id'] == 333
 
 def test_create_hullinfo_hull_id_creation():
-    first_id = create_hullinfo('test_for_hull_id_increment')[0]['hull_id']
-    second_id = create_hullinfo('test_for_hull_id_increment')[0]['hull_id']
-    assert first_id+1 == second_id
+    first_id = create_hullinfo('test_for_hull_id_increment ' + str(time.time()))[0]['hull_id']
+    second_id = create_hullinfo('test_for_hull_id_increment ' + str(time.time()))[0]['hull_id']
+    assert first_id + 1 == second_id
