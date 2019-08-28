@@ -1,6 +1,6 @@
 from app import *
 from app.models import *
-from sqlalchemy import text
+from sqlalchemy import *
 
 
 # hullinfo bejegyzés:
@@ -14,7 +14,7 @@ from sqlalchemy import text
 
 
 # ezt fogja meghívni a post metódus, validáció majd mezőbe szúrás
-def create_hullinfo(name, hull_id=-1,  version=-1, description=""):
+def create_hullinfo(name, hull_id=-1,  version=0, description=""):
     """
     hullinfó bejegyzés létrehozása
     https://docs.sqlalchemy.org/en/13/orm/tutorial.html#adding-and-updating-objects
@@ -49,6 +49,7 @@ def create_hullinfo(name, hull_id=-1,  version=-1, description=""):
     app.alias.make_alias(name, hull_id)
     db.session.flush()
     db.session.commit()
+
 
     return get_hullinfo_by_hull_id(hull_id, version)
 
