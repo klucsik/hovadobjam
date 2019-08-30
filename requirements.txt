@@ -8,3 +8,4 @@ Flask-Script
 psycopg2
 Flask-WTF
 flask-login
+flask-migrate
