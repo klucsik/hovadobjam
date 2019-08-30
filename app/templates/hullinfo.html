@@ -14,20 +14,25 @@
 <h2>Más nevek:</h2>
 
 {% for i in aliases %}
+      {{i}},
+{% endfor %}
 
-      <h3>{{i}}</h3>
+<h2>Hova dobjam?</h2>
+
+{% for i in range(0,kuka_list_len) %}
+{% set item_0 = kuka_count_list[0][loop.index-1] %}
+{% set item_1 = kuka_count_list[1][loop.index-1] %}
+{% set item_2 = kuka_count_list[2][loop.index-1] %}
+<li><a href="{{ url_for('hova_dobta', hull_id=adatlap.hull_id, user_id=current_user.id, kuka_id=item_0 ) }}"> {{ item_1 }}</a> {{ item_2 }}</li>
 
 {% endfor %}
 
 
-    <h2>Adatlap</h2>
+<h2>Adatlap</h2>
+<h3>Név:</h3> {{adatlap.name}}
+<h3>hull_id:</h3> {{adatlap.hull_id}}
+<h3>Verzió:</h3> {{adatlap.version}}
+<h3>leírás:</h3> {{adatlap.description}}
 
-{% for i in adatlap %}
-  {% for k,v in i.items() %}
-      <h3>{{k}} : {{v}}</h3>
-  {% endfor %}
-{% endfor %}
-
-    </form>
 
 {% endblock %}
