@@ -3,6 +3,14 @@
 {% block content %}
 
     <h1>Hello there!</h1>
+A Hova Dobjam oldal abban próbál segítségedre lenni hogy eldönthesd az egyes szemeteidről hogy hová is kéne dobni. <br>
+Keress rá egy szemétre és láthatod hogy mások előtted hova dobták (látni fogod a kukákat és egy számot mellette)<br>
+Kattints rá a kukára amibe kidobtad a szemetet és máris te is hozzátettél az adatbázishoz :)
+<br>
+Az oldal még a fejlesztési fázis elején van.
+
+<a href= "https://github.com/klucsik/hovadobjam">projekt oldala és forrása itt</a>
+
 
     <h2>Keresés</h2>
     <form action="" method="post" novalidate>
@@ -14,19 +22,6 @@
         <p>{{ form.submit() }}</p>
     </form>
 
-    <h1>Beküldés</h1>
-    <form action="" method="post" novalidate>
-        {{ form1.hidden_tag() }}
-        <p>
-            {{ form1.hullinfo_name.label }}<br>
-            {{ form1.hullinfo_name(size=50) }}
-        </p>
-        <p>
-            {{ form1.hullinfo_description.label }}<br>
-            {{ form1.hullinfo_description(size=50) }}
-        </p>
-        <p>{{ form1.submit() }}</p>
 
-    </form>
 
 {% endblock %}

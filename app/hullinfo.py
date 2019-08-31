@@ -91,6 +91,10 @@ def get_hullinfo_by_name(name,  version=-1):
     return result_row
 
 
+def get_hullinfo_by_hull_id(hull_id):
+    result_row = HullInfoVersionated.query.filter_by(hull_id=hull_id).first()
+    return result_row
+
 
 import app.alias # azért van itt lent mert az aliassal ezek körkörösen hívják egymást és megmekken enélkül
 

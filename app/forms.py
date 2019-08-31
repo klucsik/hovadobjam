@@ -11,6 +11,7 @@ class HullinfoKeresesForm(FlaskForm):
 class HullinfoHozzaadasForm(FlaskForm):
     hullinfo_name = StringField('hullinfo_name', validators=[DataRequired()])
     hullinfo_description = StringField('hullinfo_description')
+    hullinfo_aliases = StringField('hullinfo_aliases')
     submit = SubmitField('Beküldés')
 
 

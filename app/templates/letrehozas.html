@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h2>Létrehozás</h2>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.hullinfo_name.label }}<br>
+            {{ form.hullinfo_name(size=50) }}
+        </p>
+        <p>
+            {{ form.hullinfo_description.label }}<br>
+            {{ form.hullinfo_description(size=50) }}
+        </p>
+        <p>
+            {{ form.hullinfo_aliases.label }}<br>
+            {{ form.hullinfo_aliases(size=50) }}
+        </p>
+
+        <p>{{ form.submit() }}</p>
+    </form>
+
+
+{% endblock %}

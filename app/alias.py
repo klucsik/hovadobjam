@@ -18,6 +18,22 @@ def get_hull_id_by_alias(alias):
     return result_id
 
 
+def get_hull_id_list_by_alias(alias):
+    result_list = [[], []]
+    try:
+        search = "%{}%".format(alias)
+        result = AliasTable.query.filter(AliasTable.name.like(search)).all()
+        logging.debug(f'get_hull_id_list_by_alias nyers találatok: {result}')
+
+        for sor in result:
+            logging.debug(f'get_hull_id_list_by_alias nyers találat: {sor}')
+            if sor.hull_id not in result_list[0]:
+                result_list[0].append(sor.hull_id)
+                result_list[1].append(get_hullinfo_by_hull_id(sor.hull_id).name)
+
+    except Exception as e:
+        logging.error(' get_hull_id_list_by_alias error: ' + str(e))
+    return result_list
 
 def get_hullinfo_by_alias(alias):
     """
