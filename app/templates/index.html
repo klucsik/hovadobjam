@@ -13,16 +13,15 @@ Az oldal még a fejlesztési fázis elején van.
 <a href= "https://github.com/klucsik/hovadobjam">projekt oldala és forrása itt</a>
 
      {% if form %}
-    <h2>Keresés</h2>
     <div class="row">
         <div class="col-md-4">
             {{ wtf.quick_form(form) }}
         </div>
     </div>
  {% endif %}
-
+<div class="list-group">
     {% for hull_info in hull_list %}
         {% include '_hull_list.html' %}
     {% endfor %}
-
+</div>
 {% endblock %}
