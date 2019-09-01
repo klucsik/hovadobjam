@@ -1,15 +1,13 @@
 {% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
 
 {% block app_content %}
 
-    <h2>Keresés</h2>
-    <form action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.hullinfo_alias.label }}{{ form.hullinfo_alias(size=50) }}
-        </p>
-        <p>{{ form.submit() }}</p>
-    </form>
+    <div class="row">
+        <div class="col-md-4">
+            {{ wtf.quick_form(form) }}
+        </div>
+    </div>
 
 
 
@@ -19,11 +17,15 @@
     {% include '_kuka_list.html' %}
 {% endfor %}
 
-<h2>Adatlap</h2>
-<h3>Nevek:</h3> {{adatlap.name}} {% for i in aliases %}, {{i}}{% endfor %}
-<h3>hull_id:</h3> {{adatlap.hull_id}}
-<h3>Verzió:</h3> {{adatlap.version}}
-<h3>leírás:</h3> {{adatlap.description}}
 
-
+<div class="card" style="width: 18rem;">
+ <!-- <img src="https://imgur.com/SgRP6AC" class="card-img-top" alt="...">-->
+  <div class="card-body">
+    <h5 class="card-title">Adatlap</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{adatlap.name}}</h6>
+    <p class="card-text">Még így ismerheted: {% for i in aliases %}, {{i}}{% endfor %}</p>
+      <p class="card-text">Verzió: {{adatlap.version}} , ID:{{adatlap.hull_id}} </p>
+      <p class="card-text">Leírás: {{adatlap.description}} </p>
+  </div>
+</div>
 {% endblock %}

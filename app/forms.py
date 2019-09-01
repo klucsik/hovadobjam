@@ -4,7 +4,7 @@ from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 from app.models import User
 
 class HullinfoKeresesForm(FlaskForm):
-    hullinfo_alias = StringField('hullinfo_alias', validators=[DataRequired()])
+    hullinfo_alias = StringField(label='', validators=[DataRequired()], render_kw={"placeholder": "Keress rá egy hulladékra!"})
     submit = SubmitField('Keresés')
 
 
