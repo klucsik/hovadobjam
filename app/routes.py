@@ -1,5 +1,5 @@
 from app import db, app
-from flask import request
+from flask import request, g
 from app.hullinfo import *
 from app.alias import *
 from flask import render_template, flash, redirect, url_for
@@ -8,7 +8,7 @@ import logging
 from flask_login import login_required, current_user, logout_user, login_user
 from app.models import User
 from app.hova_dobjam_kimutatas import *
-
+import time
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
@@ -114,3 +114,8 @@ def register():
         flash('Congratulations, you are now a registered user!')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
+
+@app.before_request
+def before_request():
+    g.request_start_time = time.time()
+    g.request_time = lambda: "%.5fs" % (time.time() - g.request_start_time)
