@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block content %}
+{% block app_content %}
 
     <h2>Keresés</h2>
     <form action="" method="post" novalidate>
@@ -15,11 +15,8 @@
 
 <h2>Hova dobjam?</h2>
 
-{% for i in range(0,kuka_list_len) %}
-{% set item_0 = kuka_count_list[0][loop.index-1] %}
-{% set item_1 = kuka_count_list[1][loop.index-1] %}
-{% set item_2 = kuka_count_list[2][loop.index-1] %}
-<li><a href="{{ url_for('hova_dobta', hull_id=adatlap.hull_id, user_id=current_user.id, kuka_id=item_0 ) }}"> {{ item_1 }}</a> {{ item_2 }}</li>
+{% for kuka in kuka_count_list %}
+    {% include '_kuka_list.html' %}
 {% endfor %}
 
 <h2>Adatlap</h2>

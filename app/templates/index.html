@@ -1,6 +1,7 @@
 {% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
 
-{% block content %}
+{% block app_content %}
 
     <h1>Hello there!</h1>
 A Hova Dobjam oldal abban próbál segítségedre lenni hogy eldönthesd az egyes szemeteidről hogy hová is kéne dobni. <br>
@@ -13,14 +14,11 @@ Az oldal még a fejlesztési fázis elején van.
 
      {% if form %}
     <h2>Keresés</h2>
-    <form action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.hullinfo_alias.label }}<br>
-            {{ form.hullinfo_alias(size=50) }}
-        </p>
-        <p>{{ form.submit() }}</p>
-    </form>
+    <div class="row">
+        <div class="col-md-4">
+            {{ wtf.quick_form(form) }}
+        </div>
+    </div>
  {% endif %}
 
     {% for hull_info in hull_list %}

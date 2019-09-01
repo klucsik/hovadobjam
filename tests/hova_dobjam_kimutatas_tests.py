@@ -10,8 +10,8 @@ def test_make_hova_dobta():
 def test_get_kuka_list():
    logging.debug(get_kuka_count_list(42))
 
-def test_get_kuka_readable():
-    thingie = get_kuka_count_list_readable(42)
+def test_get_kuka_count_dict():
+    thingie = get_kuka_count_dict(42)
     logging.debug(thingie)
-    assert thingie[1][0] == 'műanyag'
+
 

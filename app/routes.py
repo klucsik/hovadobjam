@@ -52,7 +52,7 @@ def letrehozas():
 def hullinfo(hull_id):
     adatlap = get_hullinfo_versionated_by_hull_id(hull_id)
     aliases = get_aliases_from_hull_id(hull_id)
-    kuka_count_list = get_kuka_count_list_readable(hull_id)
+    kuka_count_list = get_kuka_count_list(hull_id)
 
     form = HullinfoKeresesForm()
     if form.validate_on_submit():
@@ -64,7 +64,7 @@ def hullinfo(hull_id):
             flash(f'a  "{form.hullinfo_alias.data}" eddig nem volt a rendszerben, de te most beviheted! ')
             return redirect(url_for('letrehozas', kereses=form.hullinfo_alias.data))
 
-    return render_template('hullinfo.html', title='Hulladék adatlap', form=form, adatlap=adatlap, aliases=aliases, kuka_count_list=kuka_count_list, kuka_list_len=len(kuka_count_list[0]))
+    return render_template('hullinfo.html', title='Hulladék adatlap', form=form, adatlap=adatlap, aliases=aliases, kuka_count_list=kuka_count_list)
 
 
 @app.route('/hova_dobta/<hull_id>', methods=['GET', 'POST'])
