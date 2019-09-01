@@ -1,32 +1,28 @@
 {% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
 
-{% block content %}
+{% block app_content %}
 
     <h1>Hello there!</h1>
+A Hova Dobjam oldal abban próbál segítségedre lenni hogy eldönthesd az egyes szemeteidről hogy hová is kéne dobni. <br>
+Keress rá egy szemétre és láthatod hogy mások előtted hova dobták (látni fogod a kukákat és egy számot mellette)<br>
+Kattints rá a kukára amibe kidobtad a szemetet és máris te is hozzátettél az adatbázishoz :)
+<br>
+Az oldal még a fejlesztési fázis elején van.
 
+<a href= "https://github.com/klucsik/hovadobjam">projekt oldala és forrása itt</a>
+
+     {% if form %}
     <h2>Keresés</h2>
-    <form action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.hullinfo_alias.label }}<br>
-            {{ form.hullinfo_alias(size=50) }}
-        </p>
-        <p>{{ form.submit() }}</p>
-    </form>
+    <div class="row">
+        <div class="col-md-4">
+            {{ wtf.quick_form(form) }}
+        </div>
+    </div>
+ {% endif %}
 
-    <h1>Beküldés</h1>
-    <form action="" method="post" novalidate>
-        {{ form1.hidden_tag() }}
-        <p>
-            {{ form1.hullinfo_name.label }}<br>
-            {{ form1.hullinfo_name(size=50) }}
-        </p>
-        <p>
-            {{ form1.hullinfo_description.label }}<br>
-            {{ form1.hullinfo_description(size=50) }}
-        </p>
-        <p>{{ form1.submit() }}</p>
-
-    </form>
+    {% for hull_info in hull_list %}
+        {% include '_hull_list.html' %}
+    {% endfor %}
 
 {% endblock %}
