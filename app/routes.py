@@ -17,16 +17,16 @@ def index():
     form = HullinfoKeresesForm()
 
     if form.validate_on_submit():
-        try:
-            hull_id = get_hull_id_by_alias(form.hullinfo_alias.data)
-            return redirect(url_for('hullinfo', hull_id=hull_id))
-        except Exception as e:
-            logging.error('Hulladék keresés error:' + str(e))
+
+        alias = form.hullinfo_alias.data
+        hull_list = get_hullinfo_list_by_alias(alias)
+        if len(hull_list) > 0:
+            return render_template('index.html', title='Hova dobjam', form=form, hull_list=hull_list)
+        else:
             flash(f'a  "{form.hullinfo_alias.data}" eddig nem volt a rendszerben, de te most beviheted! ')
             return redirect(url_for('letrehozas', kereses=form.hullinfo_alias.data))
 
     return render_template('index.html', title='Hova dobjam', form=form)
-
 
 
 @app.route('/letrehozas', methods=['GET', 'POST'])
@@ -66,6 +66,7 @@ def hullinfo(hull_id):
 
     return render_template('hullinfo.html', title='Hulladék adatlap', form=form, adatlap=adatlap, aliases=aliases, kuka_count_list=kuka_count_list, kuka_list_len=len(kuka_count_list[0]))
 
+
 @app.route('/hova_dobta/<hull_id>', methods=['GET', 'POST'])
 @login_required
 def hova_dobta(hull_id):
@@ -76,7 +77,6 @@ def hova_dobta(hull_id):
     #TODO: trystruktúra az error handlinghoz
 
     return redirect(url_for('index'))
-
 
 
 @app.route('/login', methods=['GET', 'POST'])
