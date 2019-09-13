@@ -1,8 +1,8 @@
 
 Feature: Hulladék keresése név alapján
-  Regisztrált vagy nem regisztrált felhasználóként,
+  Felhasználóként,
   Szeretnék rákeresni a hulladékra,
-  Hogy megtudjam hova kell kidobni,
+  Hogy megtudjam nézni az adatlapját. 
   
   Scenario: Keresés névvel.
     Given a Hova Dobjam kezdő oldalán vagyok
