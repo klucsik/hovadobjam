@@ -18,10 +18,15 @@ Scenario: Hova dobjam szekció megjelenése
   When rákattintok a hovadobjam szekció bővebben funkcióra
   Then megjelenik az összes kuka, a hova dobta gyakoriság szerint rendezve
   
- Scenario: hogyan dobjam szekció megjelenése
+ Scenario: Hogyan dobjam szekció megjelenése
   Given Egy hulladék bejegyzéslapján vagyok
   When rákattintok a hogyan szekció bővebben funkcióra
   Then népszerűség szerint sorbarendezve látom az összes hogyan kommentet
+  
+ Scenario: Helyette szekció megjelenése
+  Given Egy hulladék bejegyzéslapján vagyok
+  When rákattintok a helyette szekció bővebben funkcióra
+  Then népszerűség szerint sorbarendezve látom az összes helyette kommentet
   
  Scenario: Hova dobta bejegyzés létrehozása 
   Given Egy hulladék bejegyzéslapján vagyok
@@ -33,6 +38,24 @@ Scenario: Hova dobjam szekció megjelenése
  
 
   
+ Scenario: Hogyan dobjam hozzászólás
+  Given Egy hulladék bejegyzéslapján vagyok 
+  And Bejelentkezett felhasználó vagyok
+  When Rá kattintok a hozzászólás funkcióra
+  And 
+  Then 
+
+
+ Scenario: 
+  Given 
+  When 
+  Then 
+
+ Scenario: 
+  Given 
+  When 
+  Then 
+
  Scenario: 
   Given 
   When 
