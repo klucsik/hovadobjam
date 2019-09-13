@@ -2,12 +2,12 @@ Feature: Hulladék bejegyzés megjelenítése, interakciók
   Felhasználóként,
   Szeretném látni a hulladék bejegyzéslapját,
   Hogy el tudjam dönteni hova és hogyan dobjam
-  
+  -
   Az adatlapra lépve az egyes szekciókat látom a következő sorrendben:
   Hova dobjam - Az első 3 ajánlott kuka. 
   hogyan dobjam - Az első 3 legnépszerűbb komment
   helyette - Az első 3 legnépszerűbb komment
-   
+  -
   Minden szekcióból csak egy részletet látok a legfontosabb információkkal,
   hogy a teljes bejegyzés könnyen áttekinthető legyen, de a egy kattintásra
   a teljes szekciót minden funkcióval el lehet érni.
