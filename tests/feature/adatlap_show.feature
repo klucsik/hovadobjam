@@ -42,19 +42,24 @@ Scenario: Hova dobjam szekció megjelenése
   Given Egy hulladék bejegyzéslapján vagyok 
   And Bejelentkezett felhasználó vagyok
   When Rá kattintok a hozzászólás funkcióra
-  And 
-  Then 
+  And Hozzá szólást írok
+  And rá kattintok a hozzászolás beküldése funkcióra
+  Then a hozzászólás megjelenik a hovadobjam szekcióban
+ 
 
 
- Scenario: 
+ Scenario: ugyanez Helyette 
   Given 
   When 
   Then 
 
- Scenario: 
-  Given 
-  When 
-  Then 
+ Scenario: Álnév hozzáadása
+  Given Egy hulladék bejegyzéslapján vagyok
+  And be jelentkezett felhasználó vagyok
+  When álnév hozzá adása funkcióra kattintok
+  And megadok egy vagy több új álnevet
+  And rá kattintok az álnév be küldése funkcióra
+  Then az álnév a hulladékhoz kapcsolódik
 
  Scenario: 
   Given 
