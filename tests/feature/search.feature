@@ -6,8 +6,8 @@ Feature: Hulladék keresése név alapján
   
   Scenario: Keresés álnévvel.
     Given a Hova Dobjam kezdő oldalán vagyok
-    When rákeresek a "burgonya"-ra
-    Then a "krumpli" bejegyzéslapjot jeleníti meg az oldal
+    When rákeresek a "krumpli"-ra
+    Then a "burgonya" bejegyzéslapjot jeleníti meg az oldal
     
  Scenario: Keresés névrészlettel.
     Given a Hova Dobjam kezdő oldalán vagyok
