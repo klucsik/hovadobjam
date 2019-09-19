@@ -61,6 +61,11 @@ Scenario: Hova dobjam szekció megjelenése
   And rá kattintok az álnév be küldése funkcióra
   Then az álnév a hulladékhoz kapcsolódik
 
+ Scenario: upvote comments
+  Given 
+  When 
+  Then 
+
  Scenario: 
   Given 
   When 
