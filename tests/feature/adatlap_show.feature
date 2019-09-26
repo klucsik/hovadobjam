@@ -45,3 +45,11 @@ Scenario: Hova dobjam szekció megjelenése
   And a feltöltésre kattintok
   Then A kép feltöltődik az adatábzisba, a hulladék adatlapjához rendelve
   And Az alkalmazás megköszöni a hozzáadott információt
+  
+  Scenario: Átnevezés
+    Given Egy hulladék bejegyzéslapján vagyok
+    When a hulladék átnevezése funkcióra kattintok
+    And Átírom a nevét
+    And a mentés funkcióra kattintok
+    Then a hulladék neve megváltozik
+    And az új név és a érgi is megmarad az alias táblában a bejegyzéshez rendelve
