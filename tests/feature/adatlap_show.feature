@@ -1,4 +1,4 @@
-Feature: Hulladék bejegyzés megjelenítése, interakciók
+Feature: Hulladék bejegyzés megjelenítése, alap adatokkal való interakciók
   Felhasználóként,
   Szeretném látni a hulladék bejegyzéslapját,
   Hogy el tudjam dönteni hova és hogyan dobjam
@@ -9,8 +9,9 @@ Feature: Hulladék bejegyzés megjelenítése, interakciók
   helyette - Az első 3 legnépszerűbb komment
   -
   Minden szekcióból csak egy részletet látok a legfontosabb információkkal,
-  hogy a teljes bejegyzés könnyen áttekinthető legyen, de a egy kattintásra
+  hogy a teljes bejegyzés könnyen áttekinthető legyen, de egy kattintásra
   a teljes szekciót minden funkcióval el lehet érni.
+  Az egyes szekciók külön featureként vannak megfogalmazva.
  
  
 Scenario: Hova dobjam szekció megjelenése
@@ -31,28 +32,11 @@ Scenario: Hova dobjam szekció megjelenése
  Scenario: Hova dobta bejegyzés létrehozása 
   Given Egy hulladék bejegyzéslapján vagyok
   And tudom hogy hova dobtam a hulladékot
-  When rákattintok a hova dobjam kimutatásban arra a kukára ahová dobtam a hulladékot
+  When rákattintok a hova dobjam szekcióban arra a kukára ahová dobtam a hulladékot
   Then létrejön az adatbázisban egy bejegyzés arról hogy hova dobtam a hulladékot
   And az alkalmazás megköszöni hogy kidobtam a hulladékot
   And visszakerülök a kezdő oldalra
  
-
-  
- Scenario: Hogyan dobjam hozzászólás
-  Given Egy hulladék bejegyzéslapján vagyok 
-  And Bejelentkezett felhasználó vagyok
-  When Rá kattintok a hozzászólás funkcióra
-  And Hozzá szólást írok
-  And rá kattintok a hozzászolás beküldése funkcióra
-  Then a hozzászólás megjelenik a hovadobjam szekcióban
- 
-
-
- Scenario: ugyanez Helyette 
-  Given 
-  When 
-  Then 
-
  Scenario: Álnév hozzáadása
   Given Egy hulladék bejegyzéslapján vagyok
   And be jelentkezett felhasználó vagyok
@@ -61,12 +45,11 @@ Scenario: Hova dobjam szekció megjelenése
   And rá kattintok az álnév be küldése funkcióra
   Then az álnév a hulladékhoz kapcsolódik
 
- Scenario: upvote comments
-  Given 
-  When 
-  Then 
-
- Scenario: 
-  Given 
-  When 
-  Then 
+ Scenario: Fénykép feltöltése
+  Given Egy hulladék bejegyzéslapján vagyok
+  And rendelkezek a hulladékomról egy fotóval
+  When A Fotó hozzáadása funkcióra kattintok
+  And Kiválasztom a feltöltendő fájlt
+  And a feltöltésre kattintok
+  Then A kép feltöltődik az adatábzisba, a hulladék adatlapjához rendelve
+  And Az alkalmazás megköszöni a hozzáadott információt
