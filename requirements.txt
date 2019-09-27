@@ -9,4 +9,4 @@ psycopg2
 Flask-WTF
 flask-login
 flask-migrate
-flask-bootstrap
+Bootstrap-Flask
