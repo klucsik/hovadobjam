@@ -27,7 +27,10 @@ def create_hullinfo_version(name, hull_id=-1, version=0, description=""):
         else:
             # SELECT hull_id FROM HullInfoVersionated ORDER BY hull_id DESC LIMIT 1
             result = HullInfoVersionated.query.order_by(HullInfoVersionated.hull_id.desc()).first()
-            last_hull_id = result.hull_id
+            try:
+                last_hull_id = result.hull_id
+            except:
+                last_hull_id=-1
             hull_id = last_hull_id+1
 
     try:
