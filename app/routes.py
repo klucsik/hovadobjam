@@ -89,6 +89,7 @@ def hova_dobta(hull_id):
 @app.route('/hogyan_dobjam', methods=['GET', 'POST'])
 @login_required
 def hogyan_dobjam_score():
+    # todo: ezt ajaxxal meghívni
     hull_id = int(request.args.get('hull_id'))
     comment_id = int(request.args.get('comment_id'))
     user_id = int(request.args.get('user_id'))
