@@ -9,9 +9,9 @@ class HullinfoKeresesForm(FlaskForm):
 
 
 class HullinfoHozzaadasForm(FlaskForm):
-    hullinfo_name = StringField('hullinfo_name', validators=[DataRequired()])
-    hullinfo_description = StringField('hullinfo_description')
-    hullinfo_aliases = StringField('hullinfo_aliases')
+    hullinfo_name = StringField('Név', validators=[DataRequired()])
+    hullinfo_description = StringField('Leírás')
+    hullinfo_aliases = StringField('Más nevek')
     submit = SubmitField('Beküldés')
 
 class HogyanForm(FlaskForm):
@@ -19,25 +19,25 @@ class HogyanForm(FlaskForm):
  submit = SubmitField('Beküldés')
 
 class LoginForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    remember_me = BooleanField('Remember Me')
-    submit = SubmitField('Sign In')
+    username = StringField('Felhasználónév', validators=[DataRequired()])
+    password = PasswordField('Jelszó', validators=[DataRequired()])
+    remember_me = BooleanField('Emlékezz rám')
+    submit = SubmitField('Bejelentkezés')
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
+    username = StringField('Felhasználónév', validators=[DataRequired()])
+    email = StringField('Email cím', validators=[DataRequired(), Email()])
+    password = PasswordField('Jelszó', validators=[DataRequired()])
     password2 = PasswordField(
-        'Repeat Password', validators=[DataRequired(), EqualTo('password')])
-    submit = SubmitField('Register')
+        'Jelszó mégegyszer', validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Regisztrálok')
 
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()
         if user is not None:
-            raise ValidationError('Please use a different username.')
+            raise ValidationError('Kérlek válassz másik felhasználónevet!')
 
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
-            raise ValidationError('Please use a different email address.')
+            raise ValidationError('Kérlek válassz másik email-címet!')
