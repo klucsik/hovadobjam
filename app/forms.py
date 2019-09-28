@@ -14,6 +14,9 @@ class HullinfoHozzaadasForm(FlaskForm):
     hullinfo_aliases = StringField('hullinfo_aliases')
     submit = SubmitField('Beküldés')
 
+class HogyanForm(FlaskForm):
+ comment = StringField('Te hogyan dobnád ki?',  validators=[DataRequired()])
+ submit = SubmitField('Beküldés')
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])

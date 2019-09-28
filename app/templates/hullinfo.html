@@ -17,14 +17,22 @@
 {% endfor %}
 
 
+
+
 <div class="card" style="width: 18rem;">
  <!-- <img src="https://imgur.com/SgRP6AC" class="card-img-top" alt="...">-->
   <div class="card-body">
-    <h5 class="card-title">Adatlap</h5>
-      <h6 class="card-subtitle mb-2 text-muted">{{adatlap.name}}</h6>
+    <h5 class="card-title">{{adatlap.name}}</h5>
     <p class="card-text">Még így ismerheted: {% for i in aliases %}, {{i}}{% endfor %}</p>
       <p class="card-text">Verzió: {{adatlap.version}} , ID:{{adatlap.hull_id}} </p>
       <p class="card-text">Leírás: {{adatlap.description}} </p>
+      </div>
+      <ul class="list-group list-group-flush">
+{% for hogyan_dobjam in hogyan_dobjam_list %}
+    {% include '_hogyan_dobjam_list.html' %}
+{% endfor %}
+          <li class="list-group-item">{{ render_form(hogyan_form) }}</li>
+
+  </ul>
   </div>
-</div>
 {% endblock %}

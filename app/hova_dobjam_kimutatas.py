@@ -1,7 +1,7 @@
 from app import *
 from app.models import *
 import logging
-from operator import itemgetter
+
 
 def make_hova_dobta(user_id, hull_id, kuka_id):
     new_row = UserHovaDobta(hull_id=hull_id, user_id=user_id, kuka_id=kuka_id)

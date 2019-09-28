@@ -41,6 +41,9 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password_hash, password)
 # TODO: db connection with hova dobta
 
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
 
 class Kuka(db.Model):
     __tablename__ = 'kuka'
@@ -56,6 +59,17 @@ class UserHovaDobta(db.Model):
     kuka_id = db.Column(db.Integer, db.ForeignKey('kuka.id'))
 
 
-@login.user_loader
-def load_user(id):
-    return User.query.get(int(id))
+class HogyanDobjam(db.Model):
+    __tablename__ = 'hogyan_dobjam'
+    id = db.Column(db.Integer, primary_key=True)
+    hull_id = db.Column(db.Integer, db.ForeignKey('hullinfo.hull_id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    comment = db.Column(db.String(500), nullable=False)
+    score = db.Column(db.Integer)
+
+
+class HogyanDobjamScores(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    comment_id = db.Column(db.Integer, db.ForeignKey('hogyan_dobjam.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    increment = db.Column(db.Integer)
