@@ -2,12 +2,13 @@ from app import db, app
 from flask import request, g
 from app.hullinfo import *
 from app.alias import *
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for, jsonify
 from app.forms import *
 import logging
 from flask_login import login_required, current_user, logout_user, login_user
 from app.models import User
 from app.hova_dobjam_kimutatas import *
+from app.hogyan_dobjam import *
 import time
 
 @app.route('/', methods=['GET', 'POST'])
@@ -53,6 +54,8 @@ def hullinfo(hull_id):
     adatlap = get_hullinfo_versionated_by_hull_id(hull_id)
     aliases = get_aliases_from_hull_id(hull_id)
     kuka_count_list = get_kuka_count_list(hull_id)
+    hogyan_dobjam_list = get_hogyan_dobjam(hull_id)
+    hogyan_form = HogyanForm()
 
     form = HullinfoKeresesForm()
     if form.validate_on_submit():
@@ -64,7 +67,11 @@ def hullinfo(hull_id):
             flash(f'a  "{form.hullinfo_alias.data}" eddig nem volt a rendszerben, de te most beviheted! ')
             return redirect(url_for('letrehozas', kereses=form.hullinfo_alias.data))
 
-    return render_template('hullinfo.html', title='Hulladék adatlap', form=form, adatlap=adatlap, aliases=aliases, kuka_count_list=kuka_count_list)
+    if hogyan_form.validate_on_submit():
+        make_hogyan_dobjam(current_user.id, int(hull_id), hogyan_form.comment.data)
+        return redirect(url_for('hullinfo', hull_id=hull_id))
+
+    return render_template('hullinfo.html', title='Hulladék adatlap', form=form, hogyan_form=hogyan_form, adatlap=adatlap, aliases=aliases, kuka_count_list=kuka_count_list, hogyan_dobjam_list=hogyan_dobjam_list)
 
 
 @app.route('/hova_dobta/<hull_id>', methods=['GET', 'POST'])
@@ -78,6 +85,16 @@ def hova_dobta(hull_id):
 
     return redirect(url_for('index'))
 
+
+@app.route('/hogyan_dobjam', methods=['GET', 'POST'])
+@login_required
+def hogyan_dobjam_score():
+    hull_id = int(request.args.get('hull_id'))
+    comment_id = int(request.args.get('comment_id'))
+    user_id = int(request.args.get('user_id'))
+    increment = int(request.args.get('increment'))
+    score_hogyan_dobjam(comment_id, user_id, increment)
+    return redirect(url_for('hullinfo', hull_id=hull_id))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -119,3 +136,4 @@ def register():
 def before_request():
     g.request_start_time = time.time()
     g.request_time = lambda: "%.5fs" % (time.time() - g.request_start_time)
+
