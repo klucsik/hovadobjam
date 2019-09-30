@@ -9,12 +9,13 @@ A másodlagos cél a tanulás!
 * Python programozás fejlesztése: Flask, SQLAlchemy, Pytest
 
 Alkalmazás elérhetősége: https://hovadobjam.herokuapp.com/
+Teszt környezet elérhetősége: https://hovadobjam-test.herokuapp.com/
 Slack szerver: https://hovadobjamdev.slack.com/
 
 Pipeline:
 A masterbe küldött pull requesteken a travis futtatja a pytestet (szóval ami nálad terminálban pytest paranccsal lefut, nála is az fog).
-A masterbe ekrülő összes push után a heroku deployolja az alkalmazást, az pár percen belül elérhető is lesz.
-
+A masterbe kerülő összes push után a heroku deployolja az alkalmazást, az pár percen belül elérhető is lesz.
+A development branchre pedig a teszt környezet van hasonlóan rá kötve (minden push egy új deployt eredményez) 
 A bare minimum milestone tartalma:
 
 Grafikai kinézet és user auth nélkül. Egyszerű html formátumban lehessen feltölteni hull_info bejegyzéseket, ezekhez aliasokat. Ezeket lehessen szerkeszteni és lekérni html formmal és apival. Szintén lehessen feltölteni és lekérni hova_dobta bejegyzéseket, lehessen lokációkat megadni irányítószám alapján. Kukak tábla feltöltése 4-5 fajtával. hova-dobjam report lekérdezhető legyen lokáció, anév segítségével. Ebből egyenesen lehessen feltölteni a hova_dobta táblába
