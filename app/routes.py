@@ -8,6 +8,7 @@ from app.hova_dobjam_kimutatas import *
 from app.hogyan_dobjam import *
 import time
 
+
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 @login_required
@@ -33,12 +34,21 @@ def letrehozas():
 
     form = HullinfoHozzaadasForm()
 
+
     if form.validate_on_submit():
         result = create_hullinfo(name=form.hullinfo_name.data)
-        aliases = form.hullinfo_aliases.data.split(' ')
-        for sor in aliases:
-            make_alias(alias=sor, hull_id=result.hull_id)
-        flash(f"Hulladék adat felvive: {result.name} , id = {result.hull_id}, aliases= {aliases}! hova dobnád?")
+        if len(form.hullinfo_alias_1.data) > 0:
+            make_alias(alias=form.hullinfo_alias_1.data, hull_id=result.hull_id)
+        if len(form.hullinfo_alias_2.data) > 0:
+            make_alias(alias=form.hullinfo_alias_2.data, hull_id=result.hull_id)
+        if len(form.hullinfo_alias_3.data) > 0:
+            make_alias(alias=form.hullinfo_alias_3.data, hull_id=result.hull_id)
+        if form.hullinfo_pic.data:
+            file_url=1
+            #  todo : http://flask.palletsprojects.com/en/1.1.x/patterns/fileuploads/
+
+            logging.debug(f"uploaded photo: {file_url}")
+        flash(f"Hulladék adat felvive: {result.name} , id = {result.hull_id}! hova dobnád?")
         return redirect(url_for('hullinfo', hull_id=result.hull_id))
     elif request.method == 'GET':
        form.hullinfo_name.data = request.args.get('kereses')
