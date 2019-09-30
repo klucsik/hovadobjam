@@ -4,21 +4,12 @@ from app import login
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
-class HullInfoVersionated(db.Model):
-    __tablename__ = 'hull_info_versionated'
-    id = db.Column(db.Integer, primary_key=True)
-    hull_id = db.Column(db.Integer, unique=False, nullable=False, index=True)
-    name = db.Column(db.String(150), unique=False, nullable=False)
-    description = db.Column(db.String(500), unique=False, nullable=True)
-    version = db.Column(db.Integer, nullable=False)
-
 
 class HullInfo(db.Model):
     __tablename__ = 'hullinfo'
     hull_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(150), unique=True, nullable=False)
-    description = db.Column(db.String(500), unique=False, nullable=True)
-    version = db.Column(db.Integer, nullable=False)
+
 
 
 class AliasTable(db.Model):

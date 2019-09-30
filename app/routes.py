@@ -1,12 +1,9 @@
-from app import db, app
+
 from flask import request, g
-from app.hullinfo import *
 from app.alias import *
-from flask import render_template, flash, redirect, url_for, jsonify
+from flask import render_template, flash, redirect, url_for
 from app.forms import *
-import logging
 from flask_login import login_required, current_user, logout_user, login_user
-from app.models import User
 from app.hova_dobjam_kimutatas import *
 from app.hogyan_dobjam import *
 import time
@@ -37,7 +34,7 @@ def letrehozas():
     form = HullinfoHozzaadasForm()
 
     if form.validate_on_submit():
-        result = create_hullinfo_version(name=form.hullinfo_name.data, description=form.hullinfo_description.data)
+        result = create_hullinfo(name=form.hullinfo_name.data)
         aliases = form.hullinfo_aliases.data.split(' ')
         for sor in aliases:
             make_alias(alias=sor, hull_id=result.hull_id)
@@ -51,7 +48,7 @@ def letrehozas():
 @app.route('/hullinfo/<hull_id>', methods=['GET', 'POST'])
 @login_required
 def hullinfo(hull_id):
-    adatlap = get_hullinfo_versionated_by_hull_id(hull_id)
+    adatlap = get_hullinfo_by_hull_id(hull_id)
     aliases = get_aliases_from_hull_id(hull_id)
     kuka_count_list = get_kuka_count_list(hull_id)
     hogyan_dobjam_list = get_hogyan_dobjam(hull_id)

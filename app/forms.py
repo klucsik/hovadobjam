@@ -10,7 +10,6 @@ class HullinfoKeresesForm(FlaskForm):
 
 class HullinfoHozzaadasForm(FlaskForm):
     hullinfo_name = StringField('Név', validators=[DataRequired()])
-    hullinfo_description = StringField('Leírás')
     hullinfo_aliases = StringField('Más nevek')
     submit = SubmitField('Beküldés')
 
@@ -28,8 +27,7 @@ class RegistrationForm(FlaskForm):
     username = StringField('Felhasználónév', validators=[DataRequired()])
     email = StringField('Email cím', validators=[DataRequired(), Email()])
     password = PasswordField('Jelszó', validators=[DataRequired()])
-    password2 = PasswordField(
-        'Jelszó mégegyszer', validators=[DataRequired(), EqualTo('password')])
+    password2 = PasswordField('Jelszó mégegyszer', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Regisztrálok')
 
     def validate_username(self, username):
