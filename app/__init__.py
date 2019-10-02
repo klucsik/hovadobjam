@@ -17,6 +17,8 @@ logging.basicConfig(level=logging.DEBUG)
 app.config.from_object(Config)
 logging.info(f"Database url: {Config.SQLALCHEMY_DATABASE_URI}")
 
+
+
 from app import routes, models
 
 

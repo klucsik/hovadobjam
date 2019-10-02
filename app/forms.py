@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, FileField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 from app.models import User
+
 
 class HullinfoKeresesForm(FlaskForm):
     hullinfo_alias = StringField(label='', validators=[DataRequired()], render_kw={"placeholder": "Keress rá egy hulladékra!"})
@@ -10,18 +11,24 @@ class HullinfoKeresesForm(FlaskForm):
 
 class HullinfoHozzaadasForm(FlaskForm):
     hullinfo_name = StringField('Név', validators=[DataRequired()])
-    hullinfo_aliases = StringField('Más nevek')
+    hullinfo_alias_1 = StringField('Más név - 1')
+    hullinfo_alias_2 = StringField('Más név - 2')
+    hullinfo_alias_3 = StringField('Más név - 3')
+  #  hullinfo_pic = FileField("fotó hozzáadása")
     submit = SubmitField('Beküldés')
 
+
 class HogyanForm(FlaskForm):
- comment = StringField('Te hogyan dobnád ki?',  validators=[DataRequired()])
- submit = SubmitField('Beküldés')
+    comment = StringField('Te hogyan dobnád ki?',  validators=[DataRequired()])
+    submit = SubmitField('Beküldés')
+
 
 class LoginForm(FlaskForm):
     username = StringField('Felhasználónév', validators=[DataRequired()])
     password = PasswordField('Jelszó', validators=[DataRequired()])
     remember_me = BooleanField('Emlékezz rám')
     submit = SubmitField('Bejelentkezés')
+
 
 class RegistrationForm(FlaskForm):
     username = StringField('Felhasználónév', validators=[DataRequired()])

@@ -41,7 +41,7 @@ def get_hullinfo_by_alias(alias):
     search = "%{}%".format(alias)
     result = AliasTable.query.filter(AliasTable.name.like(search)).first()
     result_id = result.hull_id
-    return get_hullinfo_versionated_by_hull_id(result_id)
+    return get_hullinfo_by_hull_id(result_id)
 
 
 def get_hullinfo_list_by_alias(alias):
@@ -52,18 +52,25 @@ def get_hullinfo_list_by_alias(alias):
     return result
 
 
+def get_alias_row(hull_id, alias):
+     result=AliasTable.query.filter_by(hull_id=hull_id, name=alias).first()
+     return result
+
+
 def make_alias(alias, hull_id):
     """
     vissza adja a HullInfoVersionated-t alias alapján
     """
-    if get_hull_id_by_alias(alias) > 0:
+    isitalready = get_alias_row(hull_id, alias)
+    if isitalready:
        logging.info("alias is already made")
+       new_alias_row=isitalready
     else:
         new_alias_row = AliasTable(hull_id=hull_id, name=alias)
         db.session.add(new_alias_row)
         db.session.flush()
         db.session.commit()
-    return get_hull_id_by_alias(alias)
+    return new_alias_row.hull_id
 
 
 def get_aliases_from_hull_id(hull_id):

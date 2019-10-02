@@ -9,6 +9,7 @@ class HullInfo(db.Model):
     __tablename__ = 'hullinfo'
     hull_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(150), unique=True, nullable=False)
+    picurl = db.Column(db.String(150))
 
 
 
@@ -16,7 +17,7 @@ class AliasTable(db.Model):
     __tablename__ = 'alias'
     id = db.Column(db.Integer, primary_key=True)
     hull_id = db.Column(db.Integer, unique=False, nullable=False)
-    name = db.Column(db.String(150), unique=True, nullable=False, index=True)
+    name = db.Column(db.String(150), unique=False, nullable=False, index=True)
 
 
 class User(UserMixin, db.Model):
