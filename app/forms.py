@@ -14,7 +14,7 @@ class HullinfoHozzaadasForm(FlaskForm):
     hullinfo_alias_1 = StringField('Más név - 1')
     hullinfo_alias_2 = StringField('Más név - 2')
     hullinfo_alias_3 = StringField('Más név - 3')
-
+  #  hullinfo_pic = FileField("fotó hozzáadása")
     submit = SubmitField('Beküldés')
 
 

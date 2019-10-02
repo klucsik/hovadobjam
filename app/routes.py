@@ -43,11 +43,11 @@ def letrehozas():
             make_alias(alias=form.hullinfo_alias_2.data, hull_id=result.hull_id)
         if len(form.hullinfo_alias_3.data) > 0:
             make_alias(alias=form.hullinfo_alias_3.data, hull_id=result.hull_id)
-        if form.hullinfo_pic.data:
-            file_url=1
+      #  if form.hullinfo_pic.data:
+        #    file_url=1
             #  todo : http://flask.palletsprojects.com/en/1.1.x/patterns/fileuploads/
 
-            logging.debug(f"uploaded photo: {file_url}")
+        #    logging.debug(f"uploaded photo: {file_url}")
         flash(f"Hulladék adat felvive: {result.name} , id = {result.hull_id}! hova dobnád?")
         return redirect(url_for('hullinfo', hull_id=result.hull_id))
     elif request.method == 'GET':
@@ -71,7 +71,7 @@ def hullinfo(hull_id):
             return redirect(url_for('hullinfo', hull_id=adatlap.hull_id))
         except Exception as e:
             logging.error('Hulladék keresés error:' + str(e))
-            flash(f'a  "{form.hullinfo_alias.data}" eddig nem volt a rendszerben, de te most beviheted! ')
+            flash(f'a  "{form.hullinfo_alias.data}" eddig nem volt a rendszerben, kérlek vidd be! ')
             return redirect(url_for('letrehozas', kereses=form.hullinfo_alias.data))
 
     if hogyan_form.validate_on_submit():
