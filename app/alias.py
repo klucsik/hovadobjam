@@ -41,7 +41,7 @@ def get_hullinfo_by_alias(alias):
     search = "%{}%".format(alias)
     result = AliasTable.query.filter(AliasTable.name.like(search)).first()
     result_id = result.hull_id
-    return get_hullinfo_versionated_by_hull_id(result_id)
+    return get_hullinfo_by_hull_id(result_id)
 
 
 def get_hullinfo_list_by_alias(alias):
