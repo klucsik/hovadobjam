@@ -34,7 +34,6 @@ def letrehozas():
 
     form = HullinfoHozzaadasForm()
 
-
     if form.validate_on_submit():
         result = create_hullinfo(name=form.hullinfo_name.data)
         if len(form.hullinfo_alias_1.data) > 0:
@@ -43,7 +42,7 @@ def letrehozas():
             make_alias(alias=form.hullinfo_alias_2.data, hull_id=result.hull_id)
         if len(form.hullinfo_alias_3.data) > 0:
             make_alias(alias=form.hullinfo_alias_3.data, hull_id=result.hull_id)
-      #  if form.hullinfo_pic.data:
+        #  if form.hullinfo_pic.data:
         #    file_url=1
             #  todo : http://flask.palletsprojects.com/en/1.1.x/patterns/fileuploads/
 
@@ -140,8 +139,8 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
+
 @app.before_request
 def before_request():
     g.request_start_time = time.time()
     g.request_time = lambda: "%.5fs" % (time.time() - g.request_start_time)
-

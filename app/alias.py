@@ -63,8 +63,8 @@ def make_alias(alias, hull_id):
     """
     isitalready = get_alias_row(hull_id, alias)
     if isitalready:
-       logging.info("alias is already made")
-       new_alias_row=isitalready
+        logging.info("alias is already made")
+        new_alias_row = isitalready
     else:
         new_alias_row = AliasTable(hull_id=hull_id, name=alias)
         db.session.add(new_alias_row)

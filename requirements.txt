@@ -10,4 +10,7 @@ Flask-WTF
 flask-login
 flask-migrate
 Bootstrap-Flask
-
+Flask-JWT-Extended
+Flask-RESTful
+flask_bcrypt
+jsonschema
