@@ -11,6 +11,13 @@ class HullInfo(db.Model):
     name = db.Column(db.String(150), unique=True, nullable=False)
     picurl = db.Column(db.String(150))
 
+    def to_dict(self):
+        data = {
+            'hull_id' : self.hull_id,
+            'name' : self.name,
+            'picurl' : self.picurl
+        }
+        return data
 
 
 class AliasTable(db.Model):

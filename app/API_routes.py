@@ -5,14 +5,33 @@ from flask_jwt_extended import (create_access_token, create_refresh_token,
                                 jwt_required, jwt_refresh_token_required, get_jwt_identity)
 
 
-@app.route('/api/kereses', methods=['POST'])
+@app.route('/api/alias', methods=['POST'])
+@jwt_required
 def api_kereses():
- return jsonify({"message":"Hello there"})
+        print(request.data)
+        data = request.get_json()
+        alias = data['alias']
+
+        hull_list = get_hullinfo_list_by_alias(alias)
+        if len(hull_list) > 0:
+            ret = {hull.hull_id: hull.to_dict() for hull in hull_list}
+            statuscode=200
+        else:
+            ret = {
+                'message' : 'not found'
+            }
+            statuscode = 404
+        return jsonify({'ok': True, 'data': ret}), statuscode
 
 
 @app.route('/api/')
 def api_index():
     return jsonify({"message": "hello, this is server :)"})
+
+@app.route('/api/test/auth',  methods=['GET'])
+@jwt_required
+def api_auth():
+    return jsonify({"message": "hello, this is server :)"}), 200
 
 @app.route('/api/auth', methods=['POST'])
 def auth_user():
@@ -29,8 +48,22 @@ def auth_user():
             print(access_token)
             db.session.flush()
             db.session.commit()
-            return jsonify({'ok': True, 'token': user.token, 'refresh': user.refresh}), 200
+            ret = {
+                'token': access_token,
+                'refresh': refresh_token
+            }
+            return jsonify({'ok': True, 'data': ret}), 200
         else:
             return jsonify({'ok': False, 'message': 'invalid username or password'}), 401
     else:
         return jsonify({'ok': False, 'message': 'Bad request parameters: {}'.format(data['message'])}), 400
+
+@app.route('/api/refresh', methods=['POST'])
+@jwt_refresh_token_required
+def refresh():
+    ''' refresh token endpoint '''
+    current_user = get_jwt_identity()
+    ret = {
+            'token': create_access_token(identity=current_user)
+    }
+    return jsonify({'ok': True, 'data': ret}), 200
