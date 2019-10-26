@@ -1,7 +1,5 @@
-
-from flask import request, g
 from app.alias import *
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for, request, g
 from app.forms import *
 from flask_login import login_required, current_user, logout_user, login_user
 from app.hova_dobjam_kimutatas import *
