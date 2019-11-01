@@ -11,10 +11,12 @@ def api_kereses():
         print(request.data)
         data = request.get_json()
         alias = data['alias']
+        ret = []
 
         hull_list = get_hullinfo_list_by_alias(alias)
         if len(hull_list) > 0:
-            ret = {hull.hull_id: hullinfo_full_todict(hull.hull_id) for hull in hull_list}
+            for hull in hull_list:
+                ret.append(hullinfo_full_todict(hull.hull_id))
             statuscode=200
         else:
             ret = {
