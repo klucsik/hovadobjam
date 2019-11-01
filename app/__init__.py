@@ -7,9 +7,9 @@ from flask_migrate import Migrate
 
 from flask_bootstrap import Bootstrap
 
-
 from flask_jwt_extended import JWTManager
 from flask_bcrypt import Bcrypt
+from flask_cors import CORS
 
 app = Flask(__name__)
 
@@ -19,6 +19,7 @@ login = LoginManager(app)
 login.login_view = 'login'
 bootstrap = Bootstrap(app)
 jwt = JWTManager(app)
+CORS(app)
 flask_bcrypt = Bcrypt(app)
 logging.basicConfig(level=logging.DEBUG)
 app.config.from_object(Config)
