@@ -6,7 +6,7 @@ from flask_jwt_extended import (create_access_token, create_refresh_token,
 
 
 @app.route('/api/alias', methods=['POST'])
-@jwt_required
+# @jwt_required
 def api_kereses():
         print(request.data)
         data = request.get_json()
