@@ -1,4 +1,20 @@
-from app.hullinfo import *
+
+from app.models import AliasTable, HullInfo
+import logging
+from app import db
+
+
+def hullinfo_full_todict(hull_id):
+    hull_row = get_hullinfo_by_hull_id(hull_id)
+    alias_list = get_aliases_from_hull_id(hull_id)
+    data = {
+        'hull_id': hull_row.hull_id,
+        'name': hull_row.name,
+        'picurl': hull_row.picurl,
+        'alias_list': alias_list
+    }
+    return data
+
 
 
 def get_hull_id_by_alias(alias):
@@ -58,9 +74,6 @@ def get_alias_row(hull_id, alias):
 
 
 def make_alias(alias, hull_id):
-    """
-    vissza adja a HullInfoVersionated-t alias alapján
-    """
     isitalready = get_alias_row(hull_id, alias)
     if isitalready:
         logging.info("alias is already made")
@@ -74,7 +87,6 @@ def make_alias(alias, hull_id):
 
 
 def get_aliases_from_hull_id(hull_id):
-    # "SELECT name FROM alias WHERE hull_id = " + str(hull_id))
     result = AliasTable.query.filter_by(hull_id=hull_id).order_by(AliasTable.name.asc()).all()
     result_alias = []
     for row in result:
@@ -85,3 +97,35 @@ def get_aliases_from_hull_id(hull_id):
 
 
 
+def create_hullinfo(name):
+    """
+    hullinfó bejegyzés létrehozása
+    https://docs.sqlalchemy.org/en/13/orm/tutorial.html#adding-and-updating-objects
+    """
+    new_hullinfo_row = HullInfo(name=name)
+    logging.info(f"inserted hullnifo row: {new_hullinfo_row}")
+    db.session.add(new_hullinfo_row)
+    db.session.flush()
+    db.session.commit()
+    hull_id = new_hullinfo_row.hull_id
+    make_alias(name, hull_id)
+    return new_hullinfo_row
+
+
+def get_hullinfo_by_hull_id(hull_id):
+    """
+    hullinfó bejegyzés lekérdezése ID alapján
+    https://docs.sqlalchemy.org/en/13/orm/tutorial.html#querying
+    """
+    result_row = HullInfo.query.filter_by(hull_id=hull_id).first()
+    return result_row
+
+
+def get_hullinfo_by_name(name):
+    """
+    hullinfó bejegyzés lekérdezése név alapján
+    """
+    search = "%{}%".format(name)
+    result_row = HullInfo.query.filter_by(HullInfo.name.like(search)).first()
+
+    return result_row

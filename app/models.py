@@ -4,20 +4,12 @@ from app import login
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
-
 class HullInfo(db.Model):
     __tablename__ = 'hullinfo'
     hull_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(150), unique=True, nullable=False)
     picurl = db.Column(db.String(150))
 
-    def to_dict(self):
-        data = {
-            'hull_id' : self.hull_id,
-            'name' : self.name,
-            'picurl' : self.picurl
-        }
-        return data
 
 
 class AliasTable(db.Model):
@@ -40,6 +32,8 @@ class User(UserMixin, db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+
+
 # TODO: db connection with hova dobta
 
 @login.user_loader
@@ -74,3 +68,5 @@ class HogyanDobjamScores(db.Model):
     comment_id = db.Column(db.Integer, db.ForeignKey('hogyan_dobjam.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     increment = db.Column(db.Integer)
+
+

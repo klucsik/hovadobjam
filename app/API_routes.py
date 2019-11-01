@@ -1,10 +1,10 @@
-from app.routes import *
+from app import db, app
 from app.json_schemas import *
-from app.models import *
+from app.models import User
 from flask_jwt_extended import (create_access_token, create_refresh_token,
                                 jwt_required, jwt_refresh_token_required, get_jwt_identity)
-
-
+from flask import request, jsonify
+from app.alias import get_hullinfo_list_by_alias, hullinfo_full_todict
 @app.route('/api/alias', methods=['POST'])
 # @jwt_required
 def api_kereses():
@@ -14,7 +14,7 @@ def api_kereses():
 
         hull_list = get_hullinfo_list_by_alias(alias)
         if len(hull_list) > 0:
-            ret = {hull.hull_id: hull.to_dict() for hull in hull_list}
+            ret = {hull.hull_id: hullinfo_full_todict(hull.hull_id) for hull in hull_list}
             statuscode=200
         else:
             ret = {
