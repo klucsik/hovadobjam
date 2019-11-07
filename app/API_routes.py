@@ -5,7 +5,7 @@ from flask_jwt_extended import (create_access_token, create_refresh_token,
                                 jwt_required, jwt_refresh_token_required, get_jwt_identity)
 from flask import request, jsonify
 from app.alias import get_hullinfo_list_by_alias, hullinfo_full_todict
-from app.hova_dobjam_kimutatas import get_kuka_count_dict
+from app.hova_dobjam_kimutatas import get_kuka_count_dict_b
 from app.hogyan_dobjam import get_hogyan_dobjam
 @app.route('/api/alias', methods=['POST'])
 # @jwt_required
@@ -32,7 +32,7 @@ def api_kereses():
 # @jwt_required
 def api_hullinfo(hull_id):
     try:
-        kuka_count_dict = get_kuka_count_dict(hull_id)
+        kuka_count_dict = get_kuka_count_dict_b(hull_id)
         ret = {
             'kuka_count': kuka_count_dict,
             # todo: hogyan dobjam infók is kellenének majd

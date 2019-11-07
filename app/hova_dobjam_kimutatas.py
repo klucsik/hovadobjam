@@ -65,9 +65,6 @@ def get_kuka_count_list(hull_id):
     return kuka_count_list_ordered
 
 
-
-
-
 def get_kuka_count_dict(hull_id):
     hovadobtalist = get_hova_dobta(hull_id)
     logging.debug(get_hova_dobta(1))
@@ -80,3 +77,21 @@ def get_kuka_count_dict(hull_id):
                 kuka_count_dict[kuka.name] = kuka_count_dict.get(kuka.name) + 1
     return kuka_count_dict
 
+def get_kuka_count_dict_b(hull_id):
+    kuka_count_list=get_kuka_count_list(hull_id)
+    kukadict={}
+    kukalist=[]
+    for kuka in kuka_count_list:
+        kukadict={}
+        kuka_id=kuka[0]
+        kuka_name = kuka[1]
+        kuka_count = kuka[2]
+        kukadict['name'] = kuka_name
+        kukadict['id'] = kuka_id
+        kukadict['count'] = kuka_count
+        kukalist.append(kukadict)
+    return kukalist
+
+
+def test_dictB():
+    print(get_kuka_count_dict_b(5))
