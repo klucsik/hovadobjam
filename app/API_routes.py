@@ -7,8 +7,10 @@ from flask import request, jsonify
 from app.alias import get_hullinfo_list_by_alias, hullinfo_full_todict
 from app.hova_dobjam_kimutatas import get_kuka_count_dict_b
 from app.hogyan_dobjam import get_hogyan_dobjam
+from flask_cors import cross_origin
+from app.auth import requires_auth, requires_scope, AuthError
+
 @app.route('/api/alias', methods=['POST'])
-# @jwt_required
 def api_kereses():
         print(request.data)
         data = request.get_json()
@@ -29,7 +31,6 @@ def api_kereses():
 
 
 @app.route('/api/hullinfo/<hull_id>', methods=['GET'])
-# @jwt_required
 def api_hullinfo(hull_id):
     try:
         kuka_count_dict = get_kuka_count_dict_b(hull_id)
@@ -51,8 +52,9 @@ def api_hullinfo(hull_id):
 def api_index():
     return jsonify({"message": "hello, this is server :)"})
 
+
 @app.route('/api/test/auth',  methods=['GET'])
-@jwt_required
+@requires_auth
 def api_auth():
     return jsonify({"message": "hello, this is server :)"}), 200
 
@@ -81,6 +83,7 @@ def auth_user():
     else:
         return jsonify({'ok': False, 'message': 'Bad request parameters: {}'.format(data['message'])}), 400
 
+
 @app.route('/api/refresh', methods=['POST'])
 @jwt_refresh_token_required
 def refresh():
@@ -90,3 +93,16 @@ def refresh():
             'token': create_access_token(identity=current_user)
     }
     return jsonify({'ok': True, 'data': ret}), 200
+
+
+@app.route("/api/private-scoped")
+@cross_origin(headers=["Content-Type", "Authorization"])
+@requires_auth
+def private_scoped():
+    if requires_scope("read:messages"):
+        response = "Hello from a private endpoint! You need to be authenticated and have a scope of read:messages to see this."
+        return jsonify(message=response)
+    raise AuthError({
+        "code": "Unauthorized",
+        "description": "You don't have access to this resource"
+    }, 403)
