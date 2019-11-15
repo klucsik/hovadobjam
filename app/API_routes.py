@@ -56,7 +56,7 @@ def api_index():
 
 
 @app.route('/api/test/',  methods=['GET'])
-@cross_origin(headers=['Content-Type', 'Authorization']) # Send Access-Control-Allow-Headers
+@cross_origin(headers=['Content-Type', 'Authorization', 'Access-Control-Allow-Credentials']) # Send Access-Control-Allow-Headers
 @jwt_required
 def api_auth():
     username = get_jwt_identity()
