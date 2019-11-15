@@ -64,6 +64,7 @@ def api_auth():
 
 
 @app.route('/api/auth', methods=['POST'])
+@cross_origin(headers=['Content-Type', 'Authorization', 'Access-Control-Allow-Credentials']) # Send Access-Control-Allow-Headers
 def auth_user():
     ''' auth endpoint '''
     data = validate_user(request.get_json())
