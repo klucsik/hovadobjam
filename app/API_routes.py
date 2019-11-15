@@ -8,7 +8,7 @@ from flask_jwt_extended import (JWTManager, jwt_required, create_access_token,
 from flask import request, jsonify
 from app.alias import get_hullinfo_list_by_alias, hullinfo_full_todict
 from app.hova_dobjam_kimutatas import get_kuka_count_dict_b
-
+from flask_cors import cross_origin
 
 
 
@@ -52,10 +52,11 @@ def api_hullinfo(hull_id):
 
 @app.route('/api/')
 def api_index():
-    return jsonify({"You sent me cookies": request.cookies})
+    return jsonify({"You_sent_me_cookies": request.cookies})
 
 
 @app.route('/api/test/',  methods=['GET'])
+@cross_origin(headers=['Content-Type', 'Authorization']) # Send Access-Control-Allow-Headers
 @jwt_required
 def api_auth():
     username = get_jwt_identity()
