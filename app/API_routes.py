@@ -8,8 +8,7 @@ from flask_jwt_extended import (JWTManager, jwt_required, create_access_token,
 from flask import request, jsonify
 from app.alias import get_hullinfo_list_by_alias, hullinfo_full_todict
 from app.hova_dobjam_kimutatas import get_kuka_count_dict_b
-from app.hogyan_dobjam import get_hogyan_dobjam
-from flask_cors import cross_origin
+
 
 
 
@@ -56,10 +55,11 @@ def api_index():
     return jsonify({"You sent me cookies": request.cookies})
 
 
-@app.route('/api/test/auth',  methods=['GET'])
+@app.route('/api/test/',  methods=['GET'])
 @jwt_required
 def api_auth():
-    return jsonify({"message": "hello, this is secret server :)"}), 200
+    username = get_jwt_identity()
+    return jsonify({'hello': 'from {}'.format(username)}), 200
 
 
 @app.route('/api/auth', methods=['POST'])
@@ -74,12 +74,12 @@ def auth_user():
             refresh_token = create_refresh_token(identity=user.username)
             user.token = access_token
             user.refresh = refresh_token
-            print(access_token)
             db.session.flush()
             db.session.commit()
             resp =jsonify({'ok': True})
             set_access_cookies(resp, access_token)
             set_refresh_cookies(resp, refresh_token)
+
             return resp, 200
         else:
             return jsonify({'ok': False, 'message': 'invalid username or password'}), 401

@@ -7,6 +7,8 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
     SQLALCHEMY_ECHO = False
+
+
     # auth
     # Configure application to store JWTs in cookies. Whenever you make
     # a request to a protected endpoint, you will need to send in the
