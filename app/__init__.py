@@ -26,6 +26,10 @@ app.config.from_object(Config)
 logging.info(f"Database url: {Config.SQLALCHEMY_DATABASE_URI}")
 
 
+
 from app import routes, models, API_routes
 
 
+@login.user_loader
+def load_user(id):
+    return models.User.query.get(int(id))

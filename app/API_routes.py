@@ -71,7 +71,7 @@ def api_login_user():
 @login_required
 def api_login_test():
     try:
-        username = current_user.name
+        username = current_user.username
     except:
         username='undefined'
     return jsonify({'hello': 'from {}'.format(username)}), 200
