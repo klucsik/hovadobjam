@@ -49,13 +49,13 @@ def api_hullinfo(hull_id):
     return jsonify({'ok': True, 'data': ret}), statuscode
 
 
-@app.route('/api/')
+@app.route('/api')
 @cross_origin(origins=['https://o2lrk.csb.app'], supports_credentials=True)  # Send Access-Control-Allow-Headers
 def api_index():
     return jsonify({"You_sent_me_cookies": request.cookies})
 
 
-@app.route('/api/test/',  methods=['GET'])
+@app.route('/api/test',  methods=['GET'])
 @cross_origin(origins=['https://o2lrk.csb.app'], supports_credentials=True)  # Send Access-Control-Allow-Headers
 @jwt_required
 def api_auth():
