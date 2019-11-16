@@ -76,7 +76,7 @@ def api_login_test():
         username='undefined'
     return jsonify({'hello': 'from {}'.format(username)}), 200
 
-@app.route('/api')
+@app.route('/api/showmycookies')
 @cross_origin(origins=['https://o2lrk.csb.app'], supports_credentials=True)  # Send Access-Control-Allow-Headers
 def api_index():
     return jsonify({"You_sent_me_cookies": request.cookies})
