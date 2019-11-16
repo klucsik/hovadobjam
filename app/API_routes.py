@@ -11,7 +11,6 @@ from app.hova_dobjam_kimutatas import get_kuka_count_dict_b
 from flask_cors import cross_origin
 
 
-
 @app.route('/api/alias', methods=['POST'])
 def api_kereses():
         print(request.data)
@@ -56,7 +55,7 @@ def api_index():
 
 
 @app.route('/api/test/',  methods=['GET'])
-@cross_origin(origins=['https://o2lrk.csb.app'], supports_credentials=True ) # Send Access-Control-Allow-Headers
+@cross_origin(origins=['https://o2lrk.csb.app'], supports_credentials=True)  # Send Access-Control-Allow-Headers
 @jwt_required
 def api_auth():
     username = get_jwt_identity()
@@ -64,6 +63,7 @@ def api_auth():
 
 
 @app.route('/api/auth', methods=['POST'])
+@cross_origin(origins=['https://o2lrk.csb.app'], supports_credentials=True)  # Send Access-Control-Allow-Headers
 def auth_user():
     ''' auth endpoint '''
     data = validate_user(request.get_json())
