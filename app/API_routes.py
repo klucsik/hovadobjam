@@ -9,7 +9,7 @@ from flask import request, jsonify
 from app.alias import get_hullinfo_list_by_alias, hullinfo_full_todict
 from app.hova_dobjam_kimutatas import get_kuka_count_dict_b
 from flask_cors import cross_origin
-
+from flask_login import login_required, current_user, logout_user, login_user
 
 @app.route('/api/alias', methods=['POST'])
 def api_kereses():
@@ -48,6 +48,32 @@ def api_hullinfo(hull_id):
         statuscode = 404
     return jsonify({'ok': True, 'data': ret}), statuscode
 
+
+@app.route('/api/login', methods=['POST'])
+# @cross_origin(origins=['https://o2lrk.csb.app'], supports_credentials=True)  # Send Access-Control-Allow-Headers
+def api_login_user():
+    ''' auth endpoint '''
+    data = validate_user(request.get_json())
+    if data['ok']:
+        data = data['data']
+        user = User.query.filter(User.username == data['username']).first()
+        if user is None or not user.check_password(data['password']):
+            return jsonify({'ok': False, 'message': 'invalid username or password'}), 401
+        login_user(user)
+        resp =jsonify({'ok': True, 'username': user.username})
+        return resp, 200
+    else:
+        return jsonify({'ok': False, 'message': 'Bad request parameters: {}'.format(data['message'])}), 400
+
+
+@app.route('/api/testlogin',  methods=['GET'])
+@login_required
+def api_login_test():
+    try:
+        username = current_user.name
+    except:
+        username='undefined'
+    return jsonify({'hello': 'from {}'.format(username)}), 200
 
 @app.route('/api')
 @cross_origin(origins=['https://o2lrk.csb.app'], supports_credentials=True)  # Send Access-Control-Allow-Headers
