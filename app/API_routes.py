@@ -64,7 +64,6 @@ def api_auth():
 
 
 @app.route('/api/auth', methods=['POST'])
-@cross_origin(origins=['https://o2lrk.csb.app'], supports_credentials=True)  # Send Access-Control-Allow-Headers
 def auth_user():
     ''' auth endpoint '''
     data = validate_user(request.get_json())
