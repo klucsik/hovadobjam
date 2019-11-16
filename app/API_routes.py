@@ -56,7 +56,7 @@ def api_index():
 
 
 @app.route('/api/test/',  methods=['GET'])
-@cross_origin(headers=['Content-Type', 'Authorization', 'Access-Control-Allow-Credentials']) # Send Access-Control-Allow-Headers
+@cross_origin(origins=['https://o2lrk.csb.app'], supports_credentials=True ) # Send Access-Control-Allow-Headers
 @jwt_required
 def api_auth():
     username = get_jwt_identity()
@@ -64,7 +64,7 @@ def api_auth():
 
 
 @app.route('/api/auth', methods=['POST'])
-@cross_origin(headers=['Content-Type', 'Authorization', 'Access-Control-Allow-Credentials']) # Send Access-Control-Allow-Headers
+@cross_origin(origins=['https://o2lrk.csb.app'], supports_credentials=True)  # Send Access-Control-Allow-Headers
 def auth_user():
     ''' auth endpoint '''
     data = validate_user(request.get_json())
