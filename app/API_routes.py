@@ -50,7 +50,7 @@ def api_hullinfo(hull_id):
 
 
 @app.route('/api/login', methods=['POST'])
-# @cross_origin(origins=['https://o2lrk.csb.app'], supports_credentials=True)  # Send Access-Control-Allow-Headers
+@cross_origin(origins=['https://o2lrk.csb.app'], supports_credentials=True)  # Send Access-Control-Allow-Headers
 def api_login_user():
     ''' auth endpoint '''
     data = validate_user(request.get_json())
@@ -67,6 +67,7 @@ def api_login_user():
 
 
 @app.route('/api/testlogin',  methods=['GET'])
+@cross_origin(origins=['https://o2lrk.csb.app'], supports_credentials=True)  # Send Access-Control-Allow-Headers
 @login_required
 def api_login_test():
     try:
