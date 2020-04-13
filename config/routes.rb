@@ -5,4 +5,7 @@ Rails.application.routes.draw do
   resources :items do
     resources :onames
   end
+
+  resources :containers
+  resources :materials
 end

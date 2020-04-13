@@ -1,0 +1,19 @@
+
+<h1>Listing Materials</h1>
+ 
+<table>
+  <tr>
+    <th>Material</th>
+    <th></th>
+  </tr>
+ 
+  <% @materials.each do |material| %>
+    <tr>
+      <td><%= material.name %></td>
+      <td><%= link_to 'Show', material_path(material) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to 'New', new_material_path %></p>
+<p><%= link_to 'Home', root_path %></p>
