@@ -3,6 +3,22 @@
 <strong>Name:</strong>
 <%= @item.name %>
 </p>
+<p>
+<strong>Other names:</strong>
+<% @item.onames.each do |oname| %>
+    <%= oname.name %>,
+<%end%>
+</p>
+
+<h2>Add another name:</h2>
+<%= form_with(model: [ @item, @item.onames.build ], local: true) do |form| %>
+  <p>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+  </p>
+    <%= form.submit %>
+  </p>
+<% end %>
 
 <p>
 <%= link_to 'Back', controller:'items' %>
