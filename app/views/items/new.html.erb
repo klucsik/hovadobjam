@@ -9,7 +9,7 @@
 
     <p>
     <%= form.label :material_id %><br>
-    <%= form.text_field :material_id %>
+    <%= form.select :material_id, Material.all.collect {|p| [p.name, p.id]} %>
   </p>
    
     <p>

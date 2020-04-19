@@ -12,3 +12,6 @@
 <p>
 <%= link_to 'Back', controller:'materials' %>
 </p>
+<p>
+<%= link_to 'Delete',  material_path, method: :delete, data: {confirm: 'Are ya sure?'}%>
+</p>

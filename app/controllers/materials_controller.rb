@@ -28,6 +28,10 @@ class MaterialsController < ApplicationController
     end
     
     def destroy
+        @material = Material.find(params[:id])
+        @material.destroy
+ 
+    redirect_to materials_path
     end
     
     private

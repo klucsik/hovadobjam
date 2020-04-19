@@ -9,10 +9,14 @@
     
     <p>
     <%= form.label :container_id %><br>
-    <%= form.text_field :container_id %>
+    <%= form.select :container_id, Container.all.collect {|p| [p.name, p.id]} %>
   </p>
 
     <p>
       <%= form.submit %>
     </p>
   <% end %>
+
+<p>
+<%= link_to 'Back', controller:'materials' %>
+</p>

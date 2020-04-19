@@ -29,3 +29,6 @@
 <p>
 <%= link_to 'Back', controller:'items' %>
 </p>
+<p>
+<%= link_to 'Delete',  item_path, method: :delete, data: {confirm: 'Are ya sure?'}%>
+</p>
